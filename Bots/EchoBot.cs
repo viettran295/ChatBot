@@ -14,12 +14,17 @@ namespace EchoBot.Bots
 {
     public class EchoBot : ActivityHandler
     {
+        string[] suggestedBot = {"suggest","suggested","suggested Bot"};
+        string[] colors = {"red", "yellow","blue"};
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            string[] trigger = {"suggest","suggested","suggested Bot"};
-            if(trigger.Contains(turnContext.Activity.Text))
+            SuggestedBot SuggestBot = new SuggestedBot();
+            if(suggestedBot.Contains(turnContext.Activity.Text))
             {
-                SuggestedBot SuggestBot = new SuggestedBot();
+                await SuggestBot.SendWelcomeMessageAsync(turnContext, cancellationToken);
+            }
+            else if(colors.Contains(turnContext.Activity.Text))
+            {
                 await SuggestBot.OnMessageActivityAsync(turnContext, cancellationToken);
             }
             else 
