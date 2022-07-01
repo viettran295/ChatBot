@@ -15,7 +15,7 @@ namespace EchoBot.Bots
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var text = turnContext.Activity.Text.ToLowerInvariant();
-            var respondText = ProcessInput(text);
+            string respondText = ProcessInput(text);
             await turnContext.SendActivityAsync(respondText);
             await SendSuggestedActivityAsync(turnContext, cancellationToken);
         }
