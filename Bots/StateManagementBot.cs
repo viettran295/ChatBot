@@ -28,7 +28,7 @@ namespace EchoBot.Bots
             await _userState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
-        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+       protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             var welcomeText = "Hello and welcome State Bot";
             foreach (var member in membersAdded)
@@ -39,7 +39,6 @@ namespace EchoBot.Bots
                 }
             }
         }
-
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var conversationStateAccessors = _conversationState.CreateProperty<ConversationData>(nameof(ConversationData));

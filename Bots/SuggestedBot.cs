@@ -6,7 +6,7 @@ using Microsoft.Bot.Schema;
 
 namespace EchoBot.Bots
 {
-    public class SuggestedBot : EchoBot
+    public class SuggestedBot : ActivityHandler
     {
         public async Task SendWelcomeMessageAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {

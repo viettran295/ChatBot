@@ -36,13 +36,17 @@ namespace EchoBot
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             // services.AddTransient<IBot, Bots.EchoBot>();
+            services.AddTransient<IBot, Bots.StateManagementBot>();
 
             // Create the User state passing in the storage layer.
             var storage = new MemoryStorage();
+
+            var conversationState = new ConversationState(storage);
+            services.AddSingleton(conversationState);
+
             var userState = new UserState(storage);
             services.AddSingleton(userState);
 
-            services.AddTransient<IBot, Bots.SuggestedBot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
