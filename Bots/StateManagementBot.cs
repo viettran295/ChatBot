@@ -30,7 +30,14 @@ namespace EchoBot.Bots
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync("Welcome to State Bot Sample. Type anything to get started.");
+            var welcomeText = "Hello and welcome State Bot";
+            foreach (var member in membersAdded)
+            {
+                if (member.Id != turnContext.Activity.Recipient.Id)
+                {
+                    await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText), cancellationToken);
+                }
+            }
         }
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
