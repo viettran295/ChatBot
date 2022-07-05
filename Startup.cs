@@ -35,8 +35,8 @@ namespace EchoBot
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            // services.AddTransient<IBot, Bots.EchoBot>();
-            services.AddTransient<IBot, Bots.StateManagementBot>();
+            services.AddTransient<IBot, Bots.EchoBot>();
+            // services.AddTransient<IBot, Bots.StateManagementBot>();
 
             // Create the User state passing in the storage layer.
             var storage = new MemoryStorage();

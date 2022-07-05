@@ -6,20 +6,15 @@ using Microsoft.Bot.Schema;
 
 namespace EchoBot.Bots
 {
-    public class SuggestedBot : ActivityHandler
+    public class SuggestedBot : EchoBot
     {
-        public async Task SendWelcomeMessageAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
-        {
-            await SendSuggestedActivityAsync(turnContext, cancellationToken);
-        }
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var text = turnContext.Activity.Text.ToLowerInvariant();
             string respondText = ProcessInput(text);
             await turnContext.SendActivityAsync(respondText);
-            await SendSuggestedActivityAsync(turnContext, cancellationToken);
         }
-        private static async Task SendSuggestedActivityAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        public async Task SendSuggestedActivityAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var reply = MessageFactory.Text("What is your favorite color?");
             reply.SuggestedActions = new SuggestedActions()

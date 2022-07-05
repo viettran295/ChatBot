@@ -14,25 +14,25 @@ namespace EchoBot.Bots
 {
     public class EchoBot : ActivityHandler
     {
-        string[] suggestedBot = {"suggest","suggested","suggested Bot"};
-        string[] colors = {"red", "yellow","blue"};
-        // protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
-        // {
-        //     SuggestedBot SuggestBot = new SuggestedBot();
-        //     if(suggestedBot.Contains(turnContext.Activity.Text))
-        //     {
-        //         await SuggestBot.SendWelcomeMessageAsync(turnContext, cancellationToken);
-        //     }
-        //     else if(colors.Contains(turnContext.Activity.Text))
-        //     {
-        //         await SuggestBot.OnMessageActivityAsync(turnContext, cancellationToken);
-        //     }
-        //     else 
-        //     {
-        //         var replyText = $"You said: {turnContext.Activity.Text}";
-        //         await turnContext.SendActivityAsync(MessageFactory.Text(replyText));
-        //     }
-        // }
+        private string[] _suggestedBot = {"suggest","suggested","suggested Bot"};
+        private string[] _colors = {"red", "yellow","blue"};
+        protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            SuggestedBot SuggestBot = new SuggestedBot();
+            if(_suggestedBot.Contains(turnContext.Activity.Text))
+            {
+                await SuggestBot.SendSuggestedActivityAsync(turnContext, cancellationToken);
+            }
+            else if(_colors.Contains(turnContext.Activity.Text))
+            {
+                await SuggestBot.OnMessageActivityAsync(turnContext, cancellationToken);
+            }
+            else 
+            {
+                var replyText = $"You said: {turnContext.Activity.Text}";
+                await turnContext.SendActivityAsync(MessageFactory.Text(replyText));
+            }
+        }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {

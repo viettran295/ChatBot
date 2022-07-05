@@ -28,17 +28,17 @@ namespace EchoBot.Bots
             await _userState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
-       protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
-        {
-            var welcomeText = "Hello and welcome State Bot";
-            foreach (var member in membersAdded)
-            {
-                if (member.Id != turnContext.Activity.Recipient.Id)
-                {
-                    await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText), cancellationToken);
-                }
-            }
-        }
+    //    protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+    //     {
+    //         var welcomeText = "Hello and welcome State Bot";
+    //         foreach (var member in membersAdded)
+    //         {
+    //             if (member.Id != turnContext.Activity.Recipient.Id)
+    //             {
+    //                 await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText), cancellationToken);
+    //             }
+    //         }
+    //     }
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var conversationStateAccessors = _conversationState.CreateProperty<ConversationData>(nameof(ConversationData));
@@ -57,7 +57,7 @@ namespace EchoBot.Bots
                 } 
                 else
                 {
-                    await turnContext.SendActivityAsync("what is ur namne?");
+                    await turnContext.SendActivityAsync("what is ur name?");
                     ConversationData.PromtedUserForName = true;
                 }
             }
